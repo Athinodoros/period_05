@@ -1,0 +1,9 @@
+------------Name attributes of HTTP protocol makes it difficult to use for real time systems.-----------
+
+
+
+The problem with the HTTP protocol is that it is stateless that means that
+the server receives a request responds to that and then throughs the request
+away. So the server after responding to a request and thrown the request has
+no way to reach out to the client again. So polling and long polling came
+in to the game(see 02_polling).

@@ -1,0 +1,19 @@
+{
+  "name": "web-sockets-chat",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "main": "./bin/www",
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "bootstrap": "^3.3.6",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "morgan": "~1.6.1",
+    "shortid": "^2.2.6",
+    "socket.io": "^1.4.5"
+  }
+}

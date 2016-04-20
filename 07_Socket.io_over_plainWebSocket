@@ -1,0 +1,19 @@
+------------ What's the advantage of using libraries like Socket.IO, ----------
+  ---------      Sock.JS, WS, over pure WebSocket libraries in the    --------
+   ------            backend and standard APIs on frontend?            ------
+    ----                  Which problems do they solve?                 ----
+
+
+Using libraries like Socket.io etc. you can gain some very useful functionality
+and connection handling for free.
+
+For example if we use pure WebSocket libraries and wwe try to upgrade from http
+to socket connection and the server replies positive and a connection among the
+browser and the server is established everything is great but if we try that from
+a browser that doesn't support webSockets then :( nothing is great the connection fails
+and the web-application fails to communicate with the client.
+
+On the other hand using a library like Socket.IO would try to connect the sever and the
+client with webSockets and if that fails then it will establish a connection with
+polling or long-polling so that the full-duplex communication is there but
+a little bit more expensive. The important thing is that we have a happy user :P

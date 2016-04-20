@@ -1,0 +1,26 @@
+---------What is HTTP streaming, SSE (Server sent events)?---------
+
+
+
+
+1) Server Sent Events (SSE)
+
+Server-sent events (SSE) is a technology where a browser receives automatic
+updates from a server via HTTP connection.
+
+Server-sent events is a standard describing how servers can initiate
+data transmission towards clients once an initial client connection
+has been established. They are commonly used to send message updates
+or continuous data streams to a browser client and designed to enhance
+native, cross-browser streaming through a JavaScript API called EventSource,
+through which a client requests a particular URL in order to receive an
+event stream.
+
+2) HTTP-Streaming(aka: HTTP server push )
+
+As a part of HTML5 the WebSocket API allows a web server and client to communicate
+over a full-duplex TCP connection.Generally the web server does not terminate a
+connection after response data has been served to a client. The web-server leaves
+the connection open so that if an event occurs (for example, a change in internal data which needs
+to be reported to one or multiple clients), it can be sent out immediately; otherwise,
+the event would have to be queued until the client's next request would have been received.

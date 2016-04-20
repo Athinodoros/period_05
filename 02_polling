@@ -1,0 +1,31 @@
+------------Explain polling and long-polling strategies, their pros and cons.-------------
+
+
+Since HTTP is a stateless protocol and the exchange of data is half-duplex. Other ways
+surfaced to achieve full-duplex client-server communication called polling and  long-polling
+which emulate server-push communication.
+
+
+1) Polling
+
+With polling the client would send requests repeatedly so that it could fake a stable connection.
+This way the server can always write to server as soon as it has something to send and if not the
+server sends a response to say NOTHING.
+
+Pros:-Can be used instead of webSockets on browsers that have not implemented webSockets yet.
+     -(against long-polling) It doesn't keep the server busy until there is something to send.
+Cons: A vast amount of data send back and forth for now reason.
+      Server busy at all times even if nothing is happening.
+
+
+2) Long-Polling
+
+Long polling
+
+
+
+Pros:-Can be used instead of webSockets on browsers that have not implemented webSockets yet.
+     -(against polling) Less amount of data transmitted back and forth.(but still a lot).
+
+Cons : A vast amount of data send back and forth for now reason.
+       Server busy at all times even if nothing is happening.

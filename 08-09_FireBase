@@ -1,0 +1,61 @@
+----------What is Backend as a Service, Database as a Service, why would-----------
+--------          you consider using Firebase in your projects?            --------
+
+
+because we hate programming and Firebase does everything for us.
+
+
+1) Backend as a Service (BAAS)
+
+Backend as a Service, or BaaS (sometimes referred to as mBaaS) is a cloud computing
+category that consists of companies that make it easier for developers to setup, use
+and operate a cloud backend for their mobile, tablet and web apps.
+
+BaaS is a model for providing web and mobile app developers with a way to link their
+applications to backend cloud storage and APIs exposed by back end applications while
+also providing features such as user management, push notifications, and integration
+with social networking services
+
+2) Database as a Service (DBAAS)
+
+Database as a Service (DBaaS) is a cloud-based approach to the storage and management of structured data.
+DBaaS delivers database functionality similar to what is found in relational database management systems
+(RDBMSes) such as SQL Server, MySQL and Oracle. Being cloud-based, on the other hand, DBaaS provides a flexible,
+scalable, on-demand platform that's oriented toward self-service and easy management, particularly in terms of
+provisioning a business' own environment. DBaaS products typically provide enough monitoring capabilities to
+track performance and usage and to alert users to potential issues. The products can also generate at least
+some degree of data analytics.
+Disadvantages to the DBaaS model include a lack of control over network performance issues, such as unacceptable
+latency and application failures. Furthermore, some DBaaS products don't support capabilities of the typical RDBMS,
+such as data compression and table partitions. Before committing to DBaaS, it's essential to assess your specific
+requirements and ensure they are satisfactorily addressed.
+
+DBaaS is one of a growing number of examples of cloud-based services including Platform as a Service (PaaS)
+and Infrastructure as a Service (IaaS) and Software as a Service (SaaS). Databases that are administrated through
+this model are sometimes referred to as cloud databases.
+
+3) Why would you consider using Firebase in your projects?
+
+It really easy to create an app really fast because of all the functionality you get for free
+with Firebase but since you are not the one handling the backend I would personally would not use
+Firebase for a major project but to test something out or have some small services on my website
+or mobile app that uses Firebase like chat for example so that if something happens and I need to untie
+miself from Firebase it would be less painful :).
+
+Also a internal web-app targeting only a small amount of people would also be an option.
+
+-------Explain the pros & cons of using a Backend as a Service Provider like Firebase. ----------
+
+Pros:
+
+1) fast development
+2) limited amount of code you have to produce therefor less chances for a mistake
+3) possible 3-way binding (agular , MVVM etc)
+4) no need to worry about reading and writing to the DataBase
+
+
+
+Cons:
+
+1) Tied to a single Vendor (and a really expensive one)
+2) rely on someone elses API and that it will not change
