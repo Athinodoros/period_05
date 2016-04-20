@@ -6,3 +6,6 @@ the mongodb log in for the openshift project ... -->
 RockMongo User: admin
 RockMongo Password: KH2t6UpVmVZH
 URL: https://chat-nosproject.rhcloud.com/rockmongo/
+
+
+the user list has some glitch (if two users end up with the same random animal it will write Me next to it)
