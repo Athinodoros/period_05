@@ -2,34 +2,46 @@
  * Created by Athinodoros on 19/4/2016.
  */
 var shortid = require('shortid');
-var clients = new Array();
+var clients = [];
 var usersList = [];
-console.log("number of clients " +clients);
+var socketsOn = [];
+console.log("number of clients " + clients);
 
-module.exports = function(socket) {
+module.exports = function (socket) {
 
 
-    function broadcast(type, payload) {
+    function broadcastOthers(type, payload) {
         socket.broadcast.emit(type, payload);
-        //socket.emit(type, payload);
-    }
-    socket.on('connected', function(){
-        console.log(socket.broadcast.id)
-       socket.emit('connected',socket.id)
+
+    };
+
+    function broadcastAll(type, payload) {
+        socket.emit(type, payload);
+
+    };
+    socket.on('connected', function (user) {
+        user.id = socket.id;
+        socketsOn.push(user);
+        usersList.push(user.userName);
+        console.log(socketsOn);
+        broadcastOthers("newUser",socketsOn)
+        broadcastAll('newUser', socketsOn)
     });
 
-    socket.on('message', function(message){
-        broadcast('message', message);
+    socket.on('message', function (incomingM) {
+        console.log(incomingM);
+        broadcastOthers("message",incomingM);
+        broadcastAll('message', incomingM);
     });
 
-    socket.on('user', function(user){
+    socket.on('user', function (user) {
         user.id = socket.id;
         clients.push(user);
-        console.log(clients );
-        socket.broadcast.emit("newUser",clients)
+        console.log(clients);
+        socket.broadcast.emit("newUser", clients)
     });
 
-    socket.on("logOut",function(user){
+    socket.on("logOut", function (user) {
         usersList.pop(user.userName);
         clients.pop(user);
     })

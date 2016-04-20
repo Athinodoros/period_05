@@ -26,20 +26,36 @@ angular.module('chat', [])
 
                     });
                 });
-            }, sok: socket
+            }
         };
+    }).factory('lists', function () {
+        messages = [];
+        users = [];
+        return {
+            addMessages: function (message) {
+                messages.push(message);
+            }, readMessages: function () {
+                return messages;
+            }, addUser: function (user) {
+                users.push(user);
+            }, readUsers: function () {
+                return users;
+            } ,dropUsers : function(){
+                users = [];
+            }
+
+        }
     })
 
-    .controller('mainController', ["socket", "$window", function (socket, $window) {
+    .controller('mainController', ["socket", "$window", "lists", function (socket, $window, lists) {
         var scope = this;
 
-        scope.animals = ["cat", "dog", "alligator", "elephant"];
-
         scope.messages = [];
-        scope.users = [];
-        scope.userID = document.cookie;
+
+        scope.animals = ["cat", "dog", "alligator", "elephant"];
         scope.userName;
         scope.inputUset = "";
+        scope.users = [];
         var me = {};
 
 
@@ -48,60 +64,77 @@ angular.module('chat', [])
                 type: "message",
                 content: scope.messageInput,
                 userName: name,
-                identifier: scope.userID
+                id: scope.userID
             });
             scope.messageInput = '';
         };
 
         scope.sendUser = function (inputUset) {
             var name = (scope.inputUset != "") ? scope.inputUset : "anonymous " + scope.animals[Math.floor(Math.random() * scope.animals.length)];
-            if($window.localStorage.userName){
-            name =$window.localStorage.userName;}else{
-                $window.localStorage.userName =name;
+            if ($window.localStorage.userName) {
+                name = $window.localStorage.userName;
+            } else {
+                $window.localStorage.userName = name;
             }
-            console.log(name);
+            //console.log(name);
             scope.userID = document.cookie.big();
-            scope.users.push(name)
-            var objectToEmit = {
-                type: "user",
-                content: name,
-                userName: $window.localStorage.userName,
-                identifier: scope.userID
-            };
-            me = objectToEmit;
+            //lists.addUser(name)
+
+            me.userName = inputUset;
             socket.emit('user', objectToEmit);
             //console.log(socket);
         };
 
-        scope.sendUser();
 
         socket.on("message", function (incom) {
-            console.log(incom)
-            scope.messages.push(incom);
+            console.log(incom);
+            scope.messages.push(incom.content)
+            lists.addMessages(incom.messages);
         });
         socket.on("connected", function (incom) {
 
         });
-        socket.emit("connected","");
+
 
         socket.on("newUser", function (incom) {
-           //scope.users.push(incom[0].userName);
-            console.log(scope.users)
-
-                incom.forEach(function(name){
-                    if(name.userName== me.userName){
-                        scope.users.push(name.content + " (You)");
-                    }else{
-                        scope.users.push(name.content);
-
-                    }
-                })
-
-
+            console.log(incom)
+            lists.dropUsers();
+            scope.users = [];
+            incom.forEach(function (name, index) {
+                lists.addUser(name);
+                if(name.userName==$window.localStorage.userName){
+                    scope.users.push(name.userName + " (Me)");
+                    console.log(name)
+                }else {
+                    scope.users.push(name.userName);
+                    console.log(name)
+                }
+            });
+            console.log(users);
         });
 
+        // emit section
+
+
+        function start() {
+            var name = (scope.inputUset != "") ? scope.inputUset : "anonymous " + scope.animals[Math.floor(Math.random() * scope.animals.length)];
+            if ($window.localStorage.getItem("userName") == null) {
+                name = $window.localStorage.userName;
+            } else {
+                $window.localStorage.userName = name;
+            }
+            console.log(name);
+            var objectToEmit = {
+                type: "user",
+                content: name,
+                userName: $window.localStorage.userName,
+            };
+            me = objectToEmit;
+            socket.emit("connected", me);
+        };
+        start();
         $window.onbeforeunload = function () {
-            socket.emit("logOut", me );
+            socket.emit("logOut", me);
         };
 
     }]);

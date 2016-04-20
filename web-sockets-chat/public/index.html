@@ -19,9 +19,10 @@
         <div class="row">
 
             <ul class="messages">
-                <li class="message" ng-repeat="message in main.messages" smooth-scroll duration="500"
+                <li class="message" ng-repeat="message in main.messages track by $index" smooth-scroll duration="500"
                     scroll-if="{{ $last }}">
-                    <p>{{message.content}}</p>
+                    <p>{{message}}</p>
+                    <!--<p>{{message}}</p>-->
                 </li>
             </ul>
 
@@ -43,7 +44,7 @@
     <div class="col-md-1" style="float: left">
         <h2>Users</h2>
         <ul class="users">
-            <li class="messages" ng-repeat="user in main.users">
+            <li class="messages" ng-repeat="user in main.users track by $index">
                 <p>{{user}}</p>
             </li>
         </ul>
